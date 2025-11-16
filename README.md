@@ -1,2 +1,3 @@
 # quant-projects
-Working projects that can be valuable
+
+Some fun stuff after working hours
