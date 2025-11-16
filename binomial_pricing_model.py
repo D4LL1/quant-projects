@@ -3,11 +3,11 @@ import pandas as pd
 import yfinance as yf
 from datetime import date
 
-n = 2
+n = 2 #leght of bionmial moderl
 time = 1 # in years
-starting_date = f"{date.today().year-time}-{date.today().month}-{date.today().day}"
+starting_date = f"{date.today().year-time}-{date.today().month}-{date.today().day}" # date 1 year before
 delta_t = time / n
-ticker = "AAPL"
+ticker = "AAPL" # tikcer for stock, use only one at the time
 K = 300 # Strike price
 type_of_otpion = "call" # or put
 
