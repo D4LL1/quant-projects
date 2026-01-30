@@ -2,8 +2,9 @@ import numpy as np
 import pandas as pd
 import yfinance as yf
 import ccxt
+
 api_keys = {"bybit":{
-            "apiKey": "#", # provide your apikey and secret
+            "apiKey": "#",
             "secret": "#"}}
 
 exchange_your = "bybit" 
@@ -116,8 +117,8 @@ def individual_metrics(df_log_prices, df_weight=None, alpha=0.05, benchmark_tick
     
     # Build metrics dictionary
     metrics_dict = {
-        "mean (%)": mean * 100,
-        "std (%)": std * 100,
+        "Mean (%)": mean * 100,
+        "Volatility (%)": std * 100,
         "Sharpe Ratio": sharpe_ratio * np.sqrt(365 * 24),
         "VaR (%)": VaR * 100,
         "Expected Shortfall (%)": ES * 100,
@@ -226,7 +227,7 @@ def portfolio_metrics(df_weight, df_log_prices, alpha=0.05, benchmark_ticker="BT
         # Portfolio returns
         portfolio_returns = (df_portfolio_prices_adj * portfolio_weights.values).sum(axis=1)
         
-        portfolio_leverage = 1.0
+        
         
         # Count long vs short positions
         if side_row is not None:
@@ -319,10 +320,10 @@ print(df_log_prices.corr().round(3))
 # Leverage comparison table
 print("\nLeverage Impact Comparison:")
 comparison_df = pd.DataFrame({
-    'Unleveraged Mean (%)': individual_metrics_unleveraged.loc['mean (%)'],
-    'Leveraged Mean (%)': individual_metrics_leveraged.loc['mean (%)'],
-    'Unleveraged Std (%)': individual_metrics_unleveraged.loc['std (%)'],
-    'Leveraged Std (%)': individual_metrics_leveraged.loc['std (%)'],
+    'Unleveraged Mean (%)': individual_metrics_unleveraged.loc['Mean (%)'],
+    'Leveraged Mean (%)': individual_metrics_leveraged.loc['Mean (%)'],
+    'Unleveraged Std (%)': individual_metrics_unleveraged.loc['Volatility (%)'],
+    'Leveraged Std (%)': individual_metrics_leveraged.loc['Volatility (%)'],
     'Leverage': df_weight.loc['leverage'] if 'BTC/USDT:USDT' not in df_weight.columns else df_weight.loc['leverage'].drop('BTC/USDT:USDT', errors='ignore')
 })
 print(comparison_df)
