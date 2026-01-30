@@ -227,7 +227,7 @@ def portfolio_metrics(df_weight, df_log_prices, alpha=0.05, benchmark_ticker="BT
         # Portfolio returns
         portfolio_returns = (df_portfolio_prices_adj * portfolio_weights.values).sum(axis=1)
         
-        
+        portfolio_leverage = 1.0
         
         # Count long vs short positions
         if side_row is not None:
